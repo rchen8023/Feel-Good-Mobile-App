@@ -1,0 +1,74 @@
+<LoginScreen>:
+    GridLayout:
+        cols: 1 # need to specify the columns number for each grid layout
+        GridLayout:
+            cols: 1
+            Label: 
+                text: "User Login"
+            TextInput:
+                id: username
+                hint_text: "Username"
+            TextInput:
+                id: password
+                hint_text: "Password"
+            Button:
+                text: "Login"
+                on_press: root.login(root.ids.username.text, root.ids.password.text)
+        GridLayout:
+            cols: 2
+            Button:
+                text: "Forgot Password?"
+            Button:
+                text: "Sign up"
+                on_press: root.sign_up() 
+                # root refers to the class of room widget which is LoginScreen class here.
+<SignUpScreen>:
+    GridLayout:
+        cols: 1
+        Label:
+            text: "Sign up for a space journey!"
+        TextInput:
+            id: username # username is an input object so not a string here
+            hint_text: "Username"
+        TextInput:
+            id: password
+            hint_text: "Password"
+        Button:
+            text: "Submit"
+            on_press: root.add_user(root.ids.username.text, root.ids.password.text)
+
+            # need to have .text to get the actual text format of inputs. 
+            # ids is a property of SignUpScreen class which inherited from Screen
+<SignUpDone>:
+    GridLayout:
+        cols: 1
+        Label:
+            text: "Sign up successful!"
+        Button:
+            text: "Back to Login page" 
+            on_press: root.go_to_main()       
+
+<HomePage>:
+    GridLayout:
+        cols: 1
+        Button:
+            text: "Logout"
+            on_press: root.log_out()
+        Label:
+            text: "How do you feel?"
+        TextInput:
+            hint_text: "Things to try: happy, sad, unloved..."
+        Button:
+            text: "Enlight me"
+        Label:
+            text: ""
+
+<RootWidget>:
+    LoginScreen:
+        name: "login_screen"
+    SignUpScreen:
+        name: "sign_up_screen"
+    SignUpDone:
+        name: "sign_up_done"
+    HomePage:
+        name: "home_page"
