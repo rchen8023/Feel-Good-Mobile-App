@@ -4,8 +4,11 @@ import json, glob, random
 from kivy.app import App 
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen 
+from kivy.uix.image import Image
+from kivy.uix.behaviors import ButtonBehavior
 from datetime import datetime
 from pathlib import Path
+from hoverable import HoverBehavior
 
 Builder.load_file('design.kv')
 
@@ -36,6 +39,9 @@ class SignUpScreen(Screen):
             json.dump(users,file)
 
         self.manager.current = "sign_up_done"
+    def cancel_sign_up(self):
+        self.manager.transition.direction = 'right'
+        self.manager.current = "login_screen"
 
 class SignUpDone(Screen):
     def go_to_main(self):
@@ -60,6 +66,8 @@ class HomePage(Screen):
         else:
             self.ids.quote.text = "Try another feeling"
 
+class ImageButton(HoverBehavior, ButtonBehavior, Image): # ButtonBehavior need to appear before Image
+    pass
 
 class RootWidget(ScreenManager):
     pass
