@@ -20,6 +20,8 @@ class LoginScreen(Screen):
 
         if uname in users and users[uname]['password'] == pword:
             self.manager.current = "home_page"
+        else:
+            self.ids.login_wrong.text = "Wrong username or password"
 
 
 
